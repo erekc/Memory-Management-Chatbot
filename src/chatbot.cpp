@@ -47,9 +47,11 @@ ChatBot::~ChatBot()
 
 ChatBot::ChatBot(const ChatBot& other){
     std::cout << "ChatBot Copy Constructor" << std::endl;
-    _image = new wxBitmap(*(other._image));
-    _chatLogic = nullptr;
-    _rootNode = nullptr;
+    _image = new wxBitmap();
+    *_image = *(other._image);
+    _rootNode = other._rootNode;
+    _chatLogic = other._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
 }
 
 ChatBot& ChatBot::operator=(const ChatBot& other){
@@ -63,9 +65,15 @@ ChatBot& ChatBot::operator=(const ChatBot& other){
         _image = NULL;
     }
 
-    _image = new wxBitmap(*(other._image));
-    _chatLogic = nullptr;
-    _rootNode = nullptr;
+    // _image = new wxBitmap(*(other._image));
+    // _chatLogic = nullptr;
+    // _rootNode = nullptr;
+    
+    _image = new wxBitmap();
+    *_image = *(other._image);
+    _rootNode = other._rootNode;
+    _chatLogic = other._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
 
     return *this;
 }
