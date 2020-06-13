@@ -173,7 +173,8 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                             }
 
                             // create new edge
-                            GraphEdge *edge = new GraphEdge(id);
+                            // GraphEdge *edge = new GraphEdge(id);
+                            std::unique_ptr<GraphEdge> edge = std::make_unique<GraphEdge>(id);
                             // edge->SetChildNode(*childNode);
                             // edge->SetParentNode(*parentNode);
                             edge->SetChildNode((*childNode).get());
@@ -184,11 +185,9 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                             AddAllTokensToElement("KEYWORD", tokens, *edge);
 
                             // store reference in child node and parent node
-                            (*childNode)->AddEdgeToParentNode(edge);
+                            (*childNode)->AddEdgeToParentNode(edge.get());
                             // (*parentNode)->AddEdgeToChildNode(edge);
-                            std::unique_ptr<GraphEdge> uedge(edge);
-                            // (*parentNode)->AddEdgeToChildNode(std::move(edge));
-                            (*parentNode)->AddEdgeToChildNode(std::move(uedge));
+                            (*parentNode)->AddEdgeToChildNode(std::move(edge));
                         }
 
                         ////
