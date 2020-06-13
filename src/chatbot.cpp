@@ -41,9 +41,6 @@ ChatBot::~ChatBot()
     std::cout << "ChatBot Destructor" << std::endl;
 }
 
-//// STUDENT CODE
-////
-
 ChatBot::ChatBot(const ChatBot& other){
     _image = new wxBitmap();
     *_image = *(other._image);
@@ -62,10 +59,6 @@ ChatBot& ChatBot::operator=(const ChatBot& other){
         delete _image;
         _image = NULL;
     }
-
-    // _image = new wxBitmap(*(other._image));
-    // _chatLogic = nullptr;
-    // _rootNode = nullptr;
 
     _image = new wxBitmap();
     *_image = *(other._image);
@@ -109,8 +102,6 @@ ChatBot& ChatBot::operator=(ChatBot&& other){
     std::cout << "ChatBot Move Assignment" << std::endl;
     return *this;
 }
-////
-//// EOF STUDENT CODE
 
 void ChatBot::ReceiveMessageFromUser(std::string message)
 {
